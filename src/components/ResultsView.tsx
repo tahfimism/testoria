@@ -6,6 +6,7 @@ interface Props {
   questions: QuizQuestion[];
   answers: Record<number, string>;
   onRestart: () => void;
+  onHome: () => void;
 }
 
 function formatTxt(questions: QuizQuestion[], answers: Record<number, string>) {
@@ -25,7 +26,7 @@ function formatTxt(questions: QuizQuestion[], answers: Record<number, string>) {
   return lines.join("\n");
 }
 
-export const ResultsView = ({ questions, answers, onRestart }: Props) => {
+export const ResultsView = ({ questions, answers, onRestart, onHome }: Props) => {
   const correct = questions.reduce((acc, q, i) => acc + ((answers[i] ?? "") === q.answer ? 1 : 0), 0);
   const accuracy = Math.round((correct / questions.length) * 100);
 
@@ -51,7 +52,7 @@ export const ResultsView = ({ questions, answers, onRestart }: Props) => {
 
   return (
     <div className="animate-fade-in">
-      <Card>
+      <Card className="border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant">
         <CardContent className="pt-6">
           <h2 className="text-2xl font-bold mb-2">Results</h2>
           <p className="text-muted-foreground mb-6">Accuracy: {accuracy}% • {correct}/{questions.length} correct</p>
@@ -76,7 +77,10 @@ export const ResultsView = ({ questions, answers, onRestart }: Props) => {
               <Button variant="outline" onClick={exportJson}>Export JSON</Button>
               <Button variant="outline" onClick={exportTxt}>Export TXT</Button>
             </div>
-            <Button variant="hero" onClick={onRestart} className="hover-scale">Restart (randomize)</Button>
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={onHome}>Home</Button>
+              <Button variant="hero" onClick={onRestart} className="hover-scale">Restart (randomize)</Button>
+            </div>
           </div>
         </CardContent>
       </Card>

@@ -15,7 +15,7 @@ interface Props {
 export const QuestionView = ({ question, index, total, selected, onSelect, onPrev, onNext }: Props) => {
   return (
     <div className="animate-fade-in">
-      <Card className="shadow-sm">
+      <Card className="shadow-sm border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant">
         <CardContent className="pt-6">
           <div className="mb-2 text-sm text-muted-foreground">Question {index + 1} of {total}</div>
           <h2 className="text-xl font-semibold mb-4">{question.question}</h2>

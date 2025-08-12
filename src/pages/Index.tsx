@@ -12,7 +12,7 @@ import type { QuestionType, QuizQuestion } from "@/types/quiz";
 import { storage } from "@/lib/storage";
 import { generateQuizFromText } from "@/lib/gemini";
 import { useToast } from "@/hooks/use-toast";
-
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -62,6 +62,13 @@ const Index = () => {
     storage.setProgress({ currentIndex: 0, answers: {} });
   };
 
+  const quitToHome = () => {
+    storage.clearSession();
+    setQuestions(null);
+    setAnswers({});
+    setCurrentIndex(0);
+  };
+
   const handleGenerate = async () => {
     if (!sourceText.trim()) {
       toast({ title: "No input", description: "Paste text or upload a file first." });
@@ -108,13 +115,35 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur border-b">
-        <div className="container flex items-center justify-between py-4">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">AI Quiz Maker</h1>
-            <p className="text-sm text-muted-foreground">Generate mixed-difficulty quizzes from your text. 100% local.</p>
+      <header className="sticky top-0 z-10 bg-background/60 backdrop-blur border-b">
+        <div className="container relative py-4">
+          <div className="flex justify-center">
+            <button type="button" onClick={quitToHome} className="group">
+              <Card className="border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant px-4 py-2 hover-scale">
+                <CardTitle className="text-xl font-bold tracking-tight">AI Quiz Maker</CardTitle>
+              </Card>
+            </button>
           </div>
-          <SettingsModal />
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2">
+            {questions && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="outline">Quit</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Quit quiz?</AlertDialogTitle>
+                    <AlertDialogDescription>This will clear your current progress and return to the home screen.</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <div className="flex justify-end gap-2">
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={quitToHome}>Quit</AlertDialogAction>
+                  </div>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+            <SettingsModal />
+          </div>
         </div>
       </header>
 
@@ -185,7 +214,7 @@ const Index = () => {
           </section>
         ) : (
           <section className="max-w-4xl mx-auto">
-            <ResultsView questions={questions} answers={answers} onRestart={handleRestart} />
+            <ResultsView questions={questions} answers={answers} onRestart={handleRestart} onHome={quitToHome} />
           </section>
         )}
       </main>
