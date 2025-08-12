@@ -82,15 +82,34 @@ const Index = () => {
     try {
       setLoading(true);
       const raw = await generateQuizFromText(sourceText, numQuestions, qType, apiKey);
-      // Ensure each question has 4 options; if true/false, standardize options
-      const normalized = raw.map((q) => {
-        const isTF = q.options.length === 2 && q.options.every((o) => ["True", "False"].includes(o));
-        return isTF
-          ? { ...q, options: ["True", "False"] }
-          : { ...q, options: q.options.slice(0, 4) };
-      });
+
+      // Enforce selected type strictly
+      let processed = raw;
+      if (qType === "multiple-choice") {
+        // Keep only questions with 4 options (drop any true/false)
+        processed = raw.filter((q) => Array.isArray(q.options) && q.options.length >= 4);
+      } else if (qType === "true-false") {
+        // Keep only true/false and standardize options
+        processed = raw
+          .filter((q) => q.options.length === 2 && q.options.every((o) => ["True", "False"].includes(o)))
+          .map((q) => ({ ...q, options: ["True", "False"] }));
+      }
+
+      // Final normalization
+      const normalized = processed.map((q) => ({
+        ...q,
+        options: qType === "true-false" ? ["True", "False"] : q.options.slice(0, 4),
+      }));
+
+      if (normalized.length === 0) {
+        throw new Error("No valid questions of the selected type were generated. Please try again.");
+      }
+
       startNewSessionWith(normalized);
-      toast({ title: "Quiz ready", description: `Generated ${normalized.length} questions.` });
+      toast({
+        title: "Quiz ready",
+        description: `Generated ${normalized.length} ${qType === "multiple-choice" ? "multiple-choice" : qType === "true-false" ? "true/false" : "mixed"} questions.`,
+      });
     } catch (e: any) {
       toast({ title: "Generation failed", description: e?.message ?? "Unknown error" });
     } finally {

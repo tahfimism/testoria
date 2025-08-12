@@ -33,11 +33,18 @@ export async function generateQuizFromText(
 
   const model = "gemini-1.5-flash";
 
-  const system = `You are an expert quiz generator. Create engaging, accurate questions that test understanding without being trivial.`;
+const system = `You are an expert quiz generator. Create engaging, accurate questions that test understanding without being trivial.`;
 
-  const instructions = `Generate ${numQuestions} quiz questions from the provided material.
+const typeGuidance =
+  type === "multiple-choice"
+    ? `All questions MUST be multiple-choice with exactly 4 plausible options. Do NOT include any true/false questions.`
+    : type === "true-false"
+    ? `All questions MUST be true/false with options ["True","False"] only. Do NOT include any multiple-choice questions.`
+    : `Include both multiple-choice and true/false questions (balanced mix).`;
+
+const instructions = `Generate ${numQuestions} quiz questions from the provided material.
 - Difficulty: mix easy, medium, and hard (do not label difficulty)
-- Types: ${type} (if "mixed", include both multiple-choice and true/false)
+- ${typeGuidance}
 - Multiple-choice questions MUST have exactly 4 plausible options; avoid obviously irrelevant distractors.
 - True/false MUST use options ["True","False"], and the answer must be exactly one of these strings.
 - Answers must be unambiguous and derived strictly from the material.
@@ -51,8 +58,8 @@ Return ONLY strict JSON in this exact format with no extra text or markdown fenc
     "answer": "string",
     "explanation": "string"
   }
-]
-`;
+]`;
+
 
   const prompt = `${system}\n\nMATERIAL:\n${content}\n\nTASK:\n${instructions}`;
 
