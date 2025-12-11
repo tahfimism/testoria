@@ -149,8 +149,97 @@ Error generating stack: `+i.message+`
 
 If you want to hide the \`${t.titleName}\`, you can wrap it with our VisuallyHidden component.
 
-For more information, see https://radix-ui.com/primitives/docs/components/${t.docsSlug}`;return d.useEffect(()=>{e&&(document.getElementById(e)||console.error(n))},[n,e]),null},mk="DialogDescriptionWarning",gk=({contentRef:e,descriptionId:t})=>{const r=`Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${n0(mk).contentName}}.`;return d.useEffect(()=>{var i;const o=(i=e.current)==null?void 0:i.getAttribute("aria-describedby");t&&o&&(document.getElementById(t)||console.warn(r))},[r,e,t]),null},r0=By,o0=Wy,i0=Qy,Sd=Ky,Ed=Gy,Cd=Xy,bd=Zy,Pd=e0;const vk=r0,yk=o0,wk=i0,s0=d.forwardRef(({className:e,...t},n)=>w.jsx(Sd,{ref:n,className:J("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",e),...t}));s0.displayName=Sd.displayName;const l0=d.forwardRef(({className:e,children:t,...n},r)=>w.jsxs(wk,{children:[w.jsx(s0,{}),w.jsxs(Ed,{ref:r,className:J("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",e),...n,children:[t,w.jsxs(Pd,{className:"absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",children:[w.jsx(zg,{className:"h-4 w-4"}),w.jsx("span",{className:"sr-only",children:"Close"})]})]})]}));l0.displayName=Ed.displayName;const a0=({className:e,...t})=>w.jsx("div",{className:J("flex flex-col space-y-1.5 text-center sm:text-left",e),...t});a0.displayName="DialogHeader";const u0=d.forwardRef(({className:e,...t},n)=>w.jsx(Cd,{ref:n,className:J("text-lg font-semibold leading-none tracking-tight",e),...t}));u0.displayName=Cd.displayName;const c0=d.forwardRef(({className:e,...t},n)=>w.jsx(bd,{ref:n,className:J("text-sm text-muted-foreground",e),...t}));c0.displayName=bd.displayName;const Sn={API_KEY:"AIQM_API_KEY",QUIZ:"AIQM_QUIZ_DATA",PROGRESS:"AIQM_PROGRESS"},bt={getApiKey(){try{return localStorage.getItem(Sn.API_KEY)}catch{return null}},setApiKey(e){try{localStorage.setItem(Sn.API_KEY,e)}catch{}},getQuiz(){try{const e=localStorage.getItem(Sn.QUIZ);return e?JSON.parse(e):null}catch{return null}},setQuiz(e){try{localStorage.setItem(Sn.QUIZ,JSON.stringify(e))}catch{}},getProgress(){try{const e=localStorage.getItem(Sn.PROGRESS);return e?JSON.parse(e):null}catch{return null}},setProgress(e){try{localStorage.setItem(Sn.PROGRESS,JSON.stringify(e))}catch{}},clearSession(){try{localStorage.removeItem(Sn.QUIZ),localStorage.removeItem(Sn.PROGRESS)}catch{}}},xk=()=>{const{toast:e}=_l(),[t,n]=d.useState(!1),[r,o]=d.useState("");d.useEffect(()=>{const s=bt.getApiKey();s&&o(s)},[]);const i=()=>{if(!r.trim()){e({title:"API key required",description:"Please enter your Gemini API key."});return}bt.setApiKey(r.trim()),e({title:"Saved",description:"Gemini API key stored locally (browser only)."}),n(!1)};return w.jsxs(vk,{open:t,onOpenChange:n,children:[w.jsx(yk,{asChild:!0,children:w.jsx(ht,{variant:"outline",children:"Settings"})}),w.jsxs(l0,{children:[w.jsxs(a0,{children:[w.jsx(u0,{children:"Settings"}),w.jsx(c0,{children:"Store your Gemini API key locally. It is never sent anywhere except directly to Google when you generate a quiz."})]}),w.jsxs("div",{className:"space-y-3",children:[w.jsx("label",{className:"text-sm",children:"Gemini API Key"}),w.jsx(Ai,{type:"password",placeholder:"AIza...",value:r,onChange:s=>o(s.target.value),autoComplete:"off",spellCheck:!1}),w.jsxs("div",{className:"flex justify-end gap-2 pt-2",children:[w.jsx(ht,{variant:"ghost",onClick:()=>n(!1),children:"Cancel"}),w.jsx(ht,{variant:"default",onClick:i,children:"Save"})]})]})]})]})},Sk=({question:e,index:t,total:n,selected:r,onSelect:o,onPrev:i,onNext:s})=>w.jsx("div",{className:"animate-fade-in",children:w.jsx(io,{className:"shadow-sm border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant",children:w.jsxs(Ri,{className:"pt-6",children:[w.jsxs("div",{className:"mb-2 text-sm text-muted-foreground",children:["Question ",t+1," of ",n]}),w.jsx("h2",{className:"text-xl font-semibold mb-4",children:e.question}),w.jsx("div",{className:"grid gap-3",children:e.options.map((l,a)=>w.jsx("button",{onClick:()=>o(l),className:`w-full text-left rounded-md border px-4 py-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${r===l?"bg-secondary":"bg-background hover:bg-accent"}`,children:l},a))}),w.jsxs("div",{className:"flex justify-between mt-6",children:[w.jsx(ht,{variant:"outline",onClick:i,disabled:t===0,children:"Previous"}),w.jsx(ht,{variant:"default",onClick:s,children:t===n-1?"Finish":"Next"})]})]})})});function Ek(e,t){const n=[];return e.forEach((r,o)=>{n.push(`${o+1}. ${r.question}`),r.options.forEach((s,l)=>{const a=String.fromCharCode(65+l);n.push(`   ${a}) ${s}`)});const i=t[o]??"(no answer)";n.push(`   Your answer: ${i}`),n.push(`   Correct: ${r.answer}`),n.push(`   Explanation: ${r.explanation}`),n.push("")}),n.join(`
-`)}const Ck=({questions:e,answers:t,onRestart:n,onHome:r})=>{const o=e.reduce((a,u,c)=>a+((t[c]??"")===u.answer?1:0),0),i=Math.round(o/e.length*100),s=()=>{const a=new Blob([JSON.stringify(e,null,2)],{type:"application/json"}),u=URL.createObjectURL(a),c=document.createElement("a");c.href=u,c.download="quiz.json",c.click(),URL.revokeObjectURL(u)},l=()=>{const a=new Blob([Ek(e,t)],{type:"text/plain"}),u=URL.createObjectURL(a),c=document.createElement("a");c.href=u,c.download="quiz.txt",c.click(),URL.revokeObjectURL(u)};return w.jsx("div",{className:"animate-fade-in",children:w.jsx(io,{className:"border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant",children:w.jsxs(Ri,{className:"pt-6",children:[w.jsx("h2",{className:"text-2xl font-bold mb-2",children:"Results"}),w.jsxs("p",{className:"text-muted-foreground mb-6",children:["Accuracy: ",i,"% • ",o,"/",e.length," correct"]}),w.jsx("div",{className:"space-y-6",children:e.map((a,u)=>{const c=t[u]??"(no answer)",f=c===a.answer;return w.jsxs("div",{className:"rounded-md border p-4",children:[w.jsxs("div",{className:"font-medium mb-2",children:[u+1,". ",a.question]}),w.jsxs("div",{className:"text-sm mb-1",children:["Your answer: ",w.jsx("span",{className:f?"text-primary":"text-destructive",children:c})]}),!f&&w.jsxs("div",{className:"text-sm mb-1",children:["Correct: ",w.jsx("span",{className:"text-primary",children:a.answer})]}),w.jsxs("div",{className:"text-sm text-muted-foreground",children:["Explanation: ",a.explanation]})]},u)})}),w.jsxs("div",{className:"flex flex-wrap gap-3 mt-6 justify-between",children:[w.jsxs("div",{className:"flex gap-3",children:[w.jsx(ht,{variant:"outline",onClick:s,children:"Export JSON"}),w.jsx(ht,{variant:"outline",onClick:l,children:"Export TXT"})]}),w.jsxs("div",{className:"flex gap-3",children:[w.jsx(ht,{variant:"outline",onClick:r,children:"Home"}),w.jsx(ht,{variant:"hero",onClick:n,className:"hover-scale",children:"Restart (randomize)"})]})]})]})})})};function bk(e){const t=/```(json)?([\s\S]*?)```/i,n=e.match(t);return(n?n[2]:e).replace(/^\uFEFF/,"").trim()}function Pk(e){const t=bk(e),n=JSON.parse(t);if(!Array.isArray(n))throw new Error("Response was not an array");return n.map(r=>({question:String(r.question??"").trim(),options:(Array.isArray(r.options)?r.options:[]).map(o=>String(o)).slice(0,4),answer:String(r.answer??"").trim(),explanation:String(r.explanation??"").trim()}))}async function Tk(e,t,n,r){var g,p,S,m,x;if(!r)throw new Error("Missing Gemini API key");const o="gemini-1.5-flash",i="You are an expert quiz generator. Create engaging, accurate questions that test understanding without being trivial.",l=`Generate ${t} quiz questions from the provided material.
+/**
+ * Application constants.
+ * @type {Object}
+ * @property {string} API_KEY - Key for storing API Key in localStorage.
+ * @property {string} QUIZ - Key for storing Quiz Data in localStorage.
+ * @property {string} PROGRESS - Key for storing Quiz Progress in localStorage.
+ */
+const Sn={API_KEY:"AIQM_API_KEY",QUIZ:"AIQM_QUIZ_DATA",PROGRESS:"AIQM_PROGRESS"},/**
+ * Service for managing local storage data.
+ */
+bt={/**
+     * Retrieves the API key from local storage.
+     * @returns {string|null} The API key or null if not found.
+     */
+getApiKey(){try{return localStorage.getItem(Sn.API_KEY)}catch{return null}},/**
+     * Saves the API key to local storage.
+     * @param {string} e - The API key to save.
+     */
+setApiKey(e){try{localStorage.setItem(Sn.API_KEY,e)}catch{}},/**
+     * Retrieves the current quiz from local storage.
+     * @returns {Object[]|null} The quiz data or null if not found.
+     */
+getQuiz(){try{const e=localStorage.getItem(Sn.QUIZ);return e?JSON.parse(e):null}catch{return null}},/**
+     * Saves the current quiz to local storage.
+     * @param {Object[]} e - The quiz data to save.
+     */
+setQuiz(e){try{localStorage.setItem(Sn.QUIZ,JSON.stringify(e))}catch{}},/**
+     * Retrieves the user's progress from local storage.
+     * @returns {Object|null} The progress object or null if not found.
+     */
+getProgress(){try{const e=localStorage.getItem(Sn.PROGRESS);return e?JSON.parse(e):null}catch{return null}},/**
+     * Saves the user's progress to local storage.
+     * @param {Object} e - The progress object to save.
+     */
+setProgress(e){try{localStorage.setItem(Sn.PROGRESS,JSON.stringify(e))}catch{}},/**
+     * Clears quiz and progress data from local storage.
+     */
+clearSession(){try{localStorage.removeItem(Sn.QUIZ),localStorage.removeItem(Sn.PROGRESS)}catch{}}},/**
+ * Settings component.
+ * Allows the user to enter and save their Gemini API key.
+ * @component
+ */
+xk=()=>{const{toast:e}=_l(),[t,n]=d.useState(!1),[r,o]=d.useState("");d.useEffect(()=>{const s=bt.getApiKey();s&&o(s)},[]);const i=()=>{if(!r.trim()){e({title:"API key required",description:"Please enter your Gemini API key."});return}bt.setApiKey(r.trim()),e({title:"Saved",description:"Gemini API key stored locally (browser only)."}),n(!1)};return w.jsxs(vk,{open:t,onOpenChange:n,children:[w.jsx(yk,{asChild:!0,children:w.jsx(ht,{variant:"outline",children:"Settings"})}),w.jsxs(l0,{children:[w.jsxs(a0,{children:[w.jsx(u0,{children:"Settings"}),w.jsx(c0,{children:"Store your Gemini API key locally. It is never sent anywhere except directly to Google when you generate a quiz."})]}),w.jsxs("div",{className:"space-y-3",children:[w.jsx("label",{className:"text-sm",children:"Gemini API Key"}),w.jsx(Ai,{type:"password",placeholder:"AIza...",value:r,onChange:s=>o(s.target.value),autoComplete:"off",spellCheck:!1}),w.jsxs("div",{className:"flex justify-end gap-2 pt-2",children:[w.jsx(ht,{variant:"ghost",onClick:()=>n(!1),children:"Cancel"}),w.jsx(ht,{variant:"default",onClick:i,children:"Save"})]})]})]})]})},/**
+ * Question component.
+ * Displays a single quiz question and its options.
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.question - The question object.
+ * @param {number} props.index - The index of the question.
+ * @param {number} props.total - The total number of questions.
+ * @param {string} props.selected - The selected option.
+ * @param {Function} props.onSelect - Callback when an option is selected.
+ * @param {Function} props.onPrev - Callback to go to the previous question.
+ * @param {Function} props.onNext - Callback to go to the next question.
+ */
+Sk=({question:e,index:t,total:n,selected:r,onSelect:o,onPrev:i,onNext:s})=>w.jsx("div",{className:"animate-fade-in",children:w.jsx(io,{className:"shadow-sm border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant",children:w.jsxs(Ri,{className:"pt-6",children:[w.jsxs("div",{className:"mb-2 text-sm text-muted-foreground",children:["Question ",t+1," of ",n]}),w.jsx("h2",{className:"text-xl font-semibold mb-4",children:e.question}),w.jsx("div",{className:"grid gap-3",children:e.options.map((l,a)=>w.jsx("button",{onClick:()=>o(l),className:`w-full text-left rounded-md border px-4 py-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${r===l?"bg-secondary":"bg-background hover:bg-accent"}`,children:l},a))}),w.jsxs("div",{className:"flex justify-between mt-6",children:[w.jsx(ht,{variant:"outline",onClick:i,disabled:t===0,children:"Previous"}),w.jsx(ht,{variant:"default",onClick:s,children:t===n-1?"Finish":"Next"})]})]})})});/**
+ * Formats quiz results into a readable text string.
+ * @param {Object[]} e - The list of questions.
+ * @param {Object} t - The user's answers.
+ * @returns {string} The formatted text.
+ */
+function Ek(e,t){const n=[];return e.forEach((r,o)=>{n.push(`${o+1}. ${r.question}`),r.options.forEach((s,l)=>{const a=String.fromCharCode(65+l);n.push(`   ${a}) ${s}`)});const i=t[o]??"(no answer)";n.push(`   Your answer: ${i}`),n.push(`   Correct: ${r.answer}`),n.push(`   Explanation: ${r.explanation}`),n.push("")}),n.join(`
+`)}/**
+ * Results component.
+ * Displays the score and a detailed review of answers.
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.questions - The list of questions.
+ * @param {Object} props.answers - The user's answers.
+ * @param {Function} props.onRestart - Callback to restart the quiz.
+ * @param {Function} props.onHome - Callback to return to the home screen.
+ */
+const Ck=({questions:e,answers:t,onRestart:n,onHome:r})=>{const o=e.reduce((a,u,c)=>a+((t[c]??"")===u.answer?1:0),0),i=Math.round(o/e.length*100),s=()=>{const a=new Blob([JSON.stringify(e,null,2)],{type:"application/json"}),u=URL.createObjectURL(a),c=document.createElement("a");c.href=u,c.download="quiz.json",c.click(),URL.revokeObjectURL(u)},l=()=>{const a=new Blob([Ek(e,t)],{type:"text/plain"}),u=URL.createObjectURL(a),c=document.createElement("a");c.href=u,c.download="quiz.txt",c.click(),URL.revokeObjectURL(u)};return w.jsx("div",{className:"animate-fade-in",children:w.jsx(io,{className:"border border-border/50 bg-card/60 backdrop-blur-md shadow-elegant",children:w.jsxs(Ri,{className:"pt-6",children:[w.jsx("h2",{className:"text-2xl font-bold mb-2",children:"Results"}),w.jsxs("p",{className:"text-muted-foreground mb-6",children:["Accuracy: ",i,"% • ",o,"/",e.length," correct"]}),w.jsx("div",{className:"space-y-6",children:e.map((a,u)=>{const c=t[u]??"(no answer)",f=c===a.answer;return w.jsxs("div",{className:"rounded-md border p-4",children:[w.jsxs("div",{className:"font-medium mb-2",children:[u+1,". ",a.question]}),w.jsxs("div",{className:"text-sm mb-1",children:["Your answer: ",w.jsx("span",{className:f?"text-primary":"text-destructive",children:c})]}),!f&&w.jsxs("div",{className:"text-sm mb-1",children:["Correct: ",w.jsx("span",{className:"text-primary",children:a.answer})]}),w.jsxs("div",{className:"text-sm text-muted-foreground",children:["Explanation: ",a.explanation]})]},u)})}),w.jsxs("div",{className:"flex flex-wrap gap-3 mt-6 justify-between",children:[w.jsxs("div",{className:"flex gap-3",children:[w.jsx(ht,{variant:"outline",onClick:s,children:"Export JSON"}),w.jsx(ht,{variant:"outline",onClick:l,children:"Export TXT"})]}),w.jsxs("div",{className:"flex gap-3",children:[w.jsx(ht,{variant:"outline",onClick:r,children:"Home"}),w.jsx(ht,{variant:"hero",onClick:n,className:"hover-scale",children:"Restart (randomize)"})]})]})]})})};/**
+ * Cleans the Markdown response to extract JSON.
+ * @param {string} e - The raw response text.
+ * @returns {string} The cleaned JSON string.
+ */
+function bk(e){const t=/```(json)?([\s\S]*?)```/i,n=e.match(t);return(n?n[2]:e).replace(/^\uFEFF/,"").trim()}/**
+ * Parses the Gemini API response.
+ * @param {string} e - The raw API response text.
+ * @returns {Object[]} The parsed list of questions.
+ */
+function Pk(e){const t=bk(e),n=JSON.parse(t);if(!Array.isArray(n))throw new Error("Response was not an array");return n.map(r=>({question:String(r.question??"").trim(),options:(Array.isArray(r.options)?r.options:[]).map(o=>String(o)).slice(0,4),answer:String(r.answer??"").trim(),explanation:String(r.explanation??"").trim()}))}/**
+ * Calls the Gemini API to generate quiz questions.
+ * @param {string} e - The text content to generate quiz from.
+ * @param {number} t - The number of questions to generate.
+ * @param {string} n - The type of questions (multiple-choice, true-false, mixed).
+ * @param {string} r - The API key.
+ * @returns {Promise<Object[]>} A promise that resolves to the list of questions.
+ */
+async function Tk(e,t,n,r){var g,p,S,m,x;if(!r)throw new Error("Missing Gemini API key");const o="gemini-1.5-flash",i="You are an expert quiz generator. Create engaging, accurate questions that test understanding without being trivial.",l=`Generate ${t} quiz questions from the provided material.
 - Difficulty: mix easy, medium, and hard (do not label difficulty)
 - ${n==="multiple-choice"?"All questions MUST be multiple-choice with exactly 4 plausible options. Do NOT include any true/false questions.":n==="true-false"?'All questions MUST be true/false with options ["True","False"] only. Do NOT include any multiple-choice questions.':"Include both multiple-choice and true/false questions (balanced mix)."}
 - Multiple-choice questions MUST have exactly 4 plausible options; avoid obviously irrelevant distractors.
